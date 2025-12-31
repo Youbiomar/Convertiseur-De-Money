@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Aero-Converter</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<div class="card">
+    <h1>Système de Conversion</h1>
+    
+    <input type="number" id="montant" placeholder="Entrez le montant..." value="1">
+    
+    <select id="deDevise"></select>
+    <div style="margin: 5px;">VERS</div>
+    <select id="versDevise"></select>
+
+    <button onclick="convertir()">Lancer le Calcul</button>
+
+    <div id="resultat">---</div>
+</div>
+
+<script>
+    const apiBase = "http://localhost:3000";
+
+    // 1. Charger les devises au démarrage
+    async function chargerDevises() {
+        const response = await fetch(`${apiBase}/devises`);
+        const codes = await response.json();
+        
+        const selectDe = document.getElementById('deDevise');
+        const selectVers = document.getElementById('versDevise');
+
+        codes.forEach(([code, nom]) => {
+            const opt = `<option value="${code}">${code} - ${nom}</option>`;
+            selectDe.innerHTML += opt;
+            selectVers.innerHTML += opt;
+        });
+
+        selectDe.value = "EUR";
+        selectVers.value = "MAD";
+    }
+
+    // 2. Fonction de conversion
+    async function convertir() {
+        const montant = document.getElementById('montant').value;
+        const de = document.getElementById('deDevise').value;
+        const vers = document.getElementById('versDevise').value;
+        const resDiv = document.getElementById('resultat');
+
+        resDiv.innerText = "Calcul...";
+
+        try {
+            const response = await fetch(`${apiBase}/convertir?de=${de}&vers=${vers}&montant=${montant}`);
+            const data = await response.json();
+            resDiv.innerText = `${data.resultat.toLocaleString()} ${vers}`;
+        } catch (e) {
+            resDiv.innerText = "Erreur";
+        }
+    }
+
+    window.onload = chargerDevises;
+</script>
+</body>
+</html>

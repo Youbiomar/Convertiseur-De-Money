@@ -1,0 +1,60 @@
+:root {
+    --cyan: #00f2ff;
+    --dark: #0a0b10;
+    --grey: #1c1f26;
+}
+
+body {
+    background-color: var(--dark);
+    color: white;
+    font-family: 'Orbitron', sans-serif; /* Style futuriste */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.card {
+    background: var(--grey);
+    padding: 30px;
+    border: 1px solid var(--cyan);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+    width: 350px;
+    text-align: center;
+}
+
+h1 { color: var(--cyan); font-size: 1.2rem; text-transform: uppercase; }
+
+input, select {
+    width: 100%;
+    background: black;
+    border: 1px solid #333;
+    color: var(--cyan);
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: var(--cyan);
+    color: black;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    box-shadow: 0 0 15px var(--cyan);
+    transform: scale(1.02);
+}
+
+#resultat {
+    font-size: 1.5rem;
+    color: #00ff88;
+    margin-top: 20px;
+}
